@@ -223,12 +223,22 @@ IIIIIIIIIIIIx00IIIIIIIIIIIIIIIIIII\
 :enemies
 s/F(M|K)/\1F/g
 s/(G|O)F/F\1/g
-/(P(M|K))|((G|O)P|MM|GG|KK|OO)/!{
+/(P(M|K))|((G|O)P)/!{
  /FM/!s/M/G/
  /GF/!s/G/M/
  /FK/!s/K/O/
  /OF/!s/O/K/
 }
+# Prevents enemies from moving into wall
+/FMM/s/FMM/MFM/
+/MMF/s/MMF/GFG/
+/GGF/s/GGF/GFG/
+/FGG/s/FGG/MFM/
+/KKF/s/KKF/KFK/
+/FKK/s/FKK/OFO/
+/OOF/s/OOF/OFO/
+/FOO/s/FOO/KFK/
+
 # If player crossed flagpole, we start ending
 :endlevel
  /FPEF/{
@@ -292,9 +302,9 @@ s/(G|O)F/F\1/g
     }
 
     # If someone fell into hole - delete him
-    s/[PMGKO](.{50})-/F\1-/
+    s/[PMGKO](.{50})-/F\1-/g
     #If mobs are above ground - move them down
-    s/([MGKO])(.{50})F/F\2\1/
+    s/([MGKO])(.{50})F/F\2\1/g
  }
  # Check the stage of jumping, and move player higher
  /(1|2|3)u/ {
@@ -340,7 +350,7 @@ s/(G|O)F/F\1/g
  # Score block
  s/X/\[48;5;208m \[0m/g
  # Little Goomba
- s/(M|G)/\[48;5;52m \[0m/g
+ s/(M|G)/\[48;5;88m \[0m/g
  # Koopa Troopa
  s/(K|O)/\[48;5;76m \[0m/g
  # Empty score block
