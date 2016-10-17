@@ -221,6 +221,9 @@ IIIIIIIIIIIIx00IIIIIIIIIIIIIIIIIII\
 }
 # When enemy hits the wall it *should* change direction
 :enemies
+#If player hits enemies he will be removed
+s/P(M|K)/\1F/
+s/(G|O)P/F\1/
 s/F(M|K)/\1F/g
 s/(G|O)F/F\1/g
 /(P(M|K))|((G|O)P)/!{
@@ -266,9 +269,6 @@ s/(G|O)F/F\1/g
  }
 
 :check
- #If player hits enemies he will be removed
- s/P(M|K)/\1F/
- s/(G|O)P/F\1/
  /(1|2)u/ !{
     # Check if player is in the sky
     /P(.{50})F/ {
@@ -369,14 +369,14 @@ s/(G|O)F/F\1/g
  s/end//
  # Clear screen
  i\
- [2J[H
+ [H
  # Print end message
  /endmsg/{
   s/endmsg$/THANK YOU MARIO!\nYOUR QUEST IS OVER.\
 WE PRESENT YOU A NEW QUEST.\n\nPLAY AGAIN/
  p;q
  }
- 
+
  /died/{
     s/died$/SORRY MARIO!\nGAME OVER.\nTRY AGAIN./
     p;q
