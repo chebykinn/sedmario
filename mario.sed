@@ -1,4 +1,4 @@
-#!/usr/bin/sed -Enf
+#!/usr/bin/env -S sed -Enf
 # Sed Mario Bros
 # 10th of December, 2015
 # (C) Ivan Chebykin <ivan4b69@gmail.com>
